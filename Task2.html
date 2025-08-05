@@ -13,12 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, 
-                #1a1a1a 0%, 
-                #2d2d2d 25%, 
-                #ff8c00 50%, 
-                #ffa500 75%, 
-                #ffb84d 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #ff8c00 50%, #ffa500 75%, #ffb84d 100%);
             min-height: 100vh;
             padding: 20px;
             animation: gradientShift 15s ease infinite;
@@ -471,12 +466,8 @@
 
                 input.addEventListener('blur', saveEdit);
                 input.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        saveEdit();
-                    }
-                    if (e.key === 'Escape') {
-                        this.renderTasks();
-                    }
+                    if (e.key === 'Enter') saveEdit();
+                    if (e.key === 'Escape') this.renderTasks();
                 });
             }
 
@@ -495,15 +486,11 @@
                 const taskElements = this.tasks.map(task => {
                     return `
                         <div class="task-item ${task.completed ? 'completed' : ''}" data-task-id="${task.id}">
-                            <div class="task-checkbox ${task.completed ? 'checked' : ''}" 
-                                 onclick="todoApp.toggleTask(${task.id})">
-                            </div>
+                            <div class="task-checkbox ${task.completed ? 'checked' : ''}" onclick="todoApp.toggleTask(${task.id})"></div>
                             <div class="task-text">${task.text}</div>
                             <div class="task-actions">
-                                <button class="action-btn edit-btn" onclick="todoApp.editTask(${task.id})" 
-                                        title="Edit task">✏️</button>
-                                <button class="action-btn delete-btn" onclick="todoApp.deleteTask(${task.id})" 
-                                        title="Delete task">🗑️</button>
+                                <button class="action-btn edit-btn" onclick="todoApp.editTask(${task.id})" title="Edit task">✏️</button>
+                                <button class="action-btn delete-btn" onclick="todoApp.deleteTask(${task.id})" title="Delete task">🗑️</button>
                             </div>
                         </div>
                     `;
@@ -521,7 +508,6 @@
                 this.completedTasksEl.textContent = completed;
                 this.pendingTasksEl.textContent = pending;
 
-                // Add a subtle animation to updated numbers
                 [this.totalTasksEl, this.completedTasksEl, this.pendingTasksEl].forEach(el => {
                     el.style.transform = 'scale(1.1)';
                     setTimeout(() => {
@@ -531,7 +517,6 @@
             }
         }
 
-        // Add slide out animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slideOut {
@@ -543,7 +528,6 @@
         `;
         document.head.appendChild(style);
 
-        // Initialize the app
         const todoApp = new TodoApp();
     </script>
 </body>
